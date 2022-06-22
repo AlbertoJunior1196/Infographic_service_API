@@ -1,0 +1,95 @@
+var sql_connection=require('./sql_module/sqlConnetction');
+var RepositorioBook=require("./repositorio_module/repositorioBooks");
+var RepositorioHouse= require("./repositorio_module/repositorioHouses");
+var RepositorioCharacter= require("./repositorio_module/repositorioCharacters");
+class Aplicacao{
+    constructor(){
+
+    }
+    InicializaTabelas(){
+        let queryTabelaBook=`
+        CREATE TABLE  if not exists Books(
+            id INT NOT NULL,
+            nome VARCHAR(255),
+            isbn VARCHAR(255),
+            authors JSON,
+            numPage INT,
+            publisher VARCHAR(255),
+            dataRelease VARCHAR(255),
+            characters JSON
+        )`;
+        let queryTabelaCharacters=`
+        CREATE TABLE  if not exists Characters(
+            id INT NOT NULL,
+            nome VARCHAR(255),
+            gender VARCHAR(255),
+            titles JSON,
+            nicknames JSON,
+            tv_series JSON,
+            books JSON
+        )`; 
+        let queryTabelaHouses=`
+        CREATE TABLE  if not exists Houses(
+            id INT NOT NULL,
+            nome VARCHAR(255),
+            region VARCHAR(255),
+            culture VARCHAR(255),
+            titles JSON,
+            lord VARCHAR(255),
+            founder VARCHAR(255),
+            members JSON
+        )`; 
+        sql_connection.query(queryTabelaBook,function(err,result){
+            if (err) throw err;
+            console.log("Table book created");
+        })
+        sql_connection.query(queryTabelaCharacters,function(err,result){
+            if (err) throw err;
+            console.log("Table characters created");
+        })
+        sql_connection.query(queryTabelaHouses,function(err,result){
+            if (err) throw err;
+            console.log("Table houses created");
+        })
+    }
+    /*--------------------------------------------livro */
+    ObterLivro(id_livro){
+        return RepositorioBook.ObterLivro(id_livro);
+    }
+    ObterLivros(){
+        return RepositorioBook.ObterTodos();
+    }
+    CriarLivros(Books){
+        RepositorioBook.Criar(Books);
+    }
+    RemoverLivro(id_Book){
+        RepositorioBook.Remover(id_Book)
+    }
+    /*----------------------------------------------------*/
+    ObterCharacter(id_Character){
+        return RepositorioCharacter.Obter(id_Character);
+    }
+    ObterCharacters(){
+        return RepositorioCharacter.ObterTodos();
+    }
+    CriarCharacters(Characters){
+        RepositorioCharacter.Criar(Characters);
+    }
+    RemoverCharacters(id_character){
+        RepositorioCharacter.Remover(id_character);
+    }
+    /*-------------------------------------------------*/ 
+    ObterHouse(id_House){
+        return RepositorioHouse.Obter(id_House);
+    }
+    ObterHouses(){
+        return RepositorioHouse.ObterTodos();
+    }
+    CriarHouses(Houses){
+        RepositorioHouse.Criar(Houses);
+    }
+    RemoverHouses(id_Houses){
+        RepositorioHouse.Remover(id_Houses);
+    }
+}
+module.exports=new Aplicacao();

@@ -53,24 +53,24 @@ class Aplicacao{
         })
     }
     /*--------------------------------------------livro */
-    ObterLivro(id_livro){
-        return RepositorioBook.ObterLivro(id_livro);
+    async ObterLivro(id_livro){
+        return await RepositorioBook.Obter(id_livro);
     }
-    ObterLivros(){
-        return RepositorioBook.ObterTodos();
+    async ObterLivros(){
+        return await RepositorioBook.ObterTodos();
     }
     CriarLivros(Books){
         RepositorioBook.Criar(Books);
     }
     RemoverLivro(id_Book){
         RepositorioBook.Remover(id_Book)
-    }
+    } 
     /*----------------------------------------------------*/
-    ObterCharacter(id_Character){
-        return RepositorioCharacter.Obter(id_Character);
+    async ObterCharacter(id_Character){
+        return await RepositorioCharacter.Obter(id_Character);
     }
-    ObterCharacters(){
-        return RepositorioCharacter.ObterTodos();
+    async ObterCharacters(){
+        return await RepositorioCharacter.ObterTodos();
     }
     CriarCharacters(Characters){
         RepositorioCharacter.Criar(Characters);
@@ -79,11 +79,11 @@ class Aplicacao{
         RepositorioCharacter.Remover(id_character);
     }
     /*-------------------------------------------------*/ 
-    ObterHouse(id_House){
-        return RepositorioHouse.Obter(id_House);
+    async ObterHouse(id_House){
+        return await RepositorioHouse.Obter(id_House);
     }
-    ObterHouses(){
-        return RepositorioHouse.ObterTodos();
+    async ObterHouses(){
+        return await RepositorioHouse.ObterTodos();
     }
     CriarHouses(Houses){
         RepositorioHouse.Criar(Houses);

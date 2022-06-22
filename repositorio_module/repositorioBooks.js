@@ -27,20 +27,26 @@ class RepositorioBook{
     Obter(id_Book){
         var resultado;
         let queryObter=`SELECT * FROM books where id = ${id_Book} `;
-        sql_connection.query(queryObter,function(err, result) {
-            if (err) throw err;
-            resultado=result;
-        });
-        return resultado;
+        return new Promise((resolve, reject) => {
+            sql_connection.query(queryObter,function(err, result) {
+                if (err) throw err;
+                console.log(result)
+                resolve(result);
+            });
+        })
     }
     ObterTodos(){
         let queryObter=`SELECT * FROM books`;
         var resutado;
-        sql_connection.query(queryObter,function(err, result) {
-            if (err) throw err;
-            resultado=result;
-        });
-        return resutado;
+        return new Promise((resolve, reject) => {
+            sql_connection.query(queryObter,function(err, result) {
+                if (err) throw err;
+                console.log(result)
+                resolve(result);
+            });
+        })
+        
+       
     }
 }
 var Repositorio= new RepositorioBook();

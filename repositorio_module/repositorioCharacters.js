@@ -27,20 +27,24 @@ class RepositorioCharacter{
     Obter(id_Character){
       var resultado;
       let queryObter=`SELECT * FROM characters where id = ${id_Character} `;
-      sql_connection.query(queryObter,function(err, result) {
-          if (err) throw err;
-          resultado=result;
-      });
-      return resultado;
+      return new Promise((resolve, reject) => {
+        sql_connection.query(queryObter,function(err, result) {
+            if (err) throw err;
+            console.log(result)
+            resolve(result);
+        });
+    })
   }
   ObterTodos(){
       let queryObter=`SELECT * FROM characters`;
       var resutado;
-      sql_connection.query(queryObter,function(err, result) {
-          if (err) throw err;
-          resultado=result;
-      });
-      return resutado;
+      return new Promise((resolve, reject) => {
+        sql_connection.query(queryObter,function(err, result) {
+            if (err) throw err;
+            console.log(result)
+            resolve(result);
+        });
+    })
   }
   }
 var Repositorio= new RepositorioCharacter();

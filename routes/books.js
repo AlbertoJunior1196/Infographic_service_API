@@ -32,6 +32,7 @@ class Books{
     }
 }
 let Livros= new Books();
+
 router
     .post("/",(req,res)=>{
        
@@ -39,12 +40,33 @@ router
         res.send("Foi adicionado")
     })
     .get("/",(req,res)=>{
-        res.send(Aplicacao.ObterLivros())
+        console.log("saida"+Aplicacao.ObterLivros());
+        Aplicacao.ObterLivros().then(function(result){
+            res.send(getParsedBooks(result))
+        })
     })
     .delete("/:id",(req,res)=>{
         Aplicacao.RemoverLivro(req.params.id)
     })
     .get("/:id",(req,res)=>{
-       res.send(Aplicacao.ObterLivro(req.params.id))
+        Aplicacao.ObterLivro(req.params.id).then(function(result){
+            res.send(getParsedBook(result[0]))
+        })
     })
+
+
+function getParsedBooks(elements){
+        var array=[];
+        elements.forEach(function(item){
+            item.authors=JSON.parse(item.authors);
+            item.characters=JSON.parse(item.characters);
+            array.push(item);
+        })
+        return array;
+}
+function getParsedBook(item){
+    item.authors=JSON.parse(item.authors);
+    item.characters=JSON.parse(item.characters);
+    return item;
+}
 module.exports = router;

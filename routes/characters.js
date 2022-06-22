@@ -31,13 +31,36 @@ router
         res.send("Foi adicionado")
     })
     .get("/",(req,res)=>{
-        res.send(Aplicacao.ObterCharacters())
+        Aplicacao.ObterCharacters().then(function(result){
+            res.send(getParsedCharacters(result))
+        })
     })
     .delete("/:id",(req,res)=>{
         Aplicacao.RemoverCharacters(req.params.id)
     })
     .get("/:id",(req,res)=>{
-    res.send(Aplicacao.ObterCharacter(req.params.id))
+        Aplicacao.ObterCharacter(req.params.id).then(function(result){
+            res.send(getParsedCharacter(result[0]))
+        })
     })
+     
+    function getParsedCharacters(elements){
+        var array=[];
+        elements.forEach(function(item){
+            item.titles=JSON.parse(item.titles);
+            item.nicknames=JSON.parse(item.nicknames);
+            item.tv_series=JSON.parse(item.tv_series);
+            item.books=JSON.parse(item.books);
+            array.push(item);
+        })
+        return array;   
+    }
+    function getParsedCharacter(item){
+        item.titles=JSON.parse(item.titles);
+        item.nicknames=JSON.parse(item.nicknames);
+        item.tv_series=JSON.parse(item.tv_series);
+        item.books=JSON.parse(item.books);
+        return item;
 
+    }
 module.exports = router;

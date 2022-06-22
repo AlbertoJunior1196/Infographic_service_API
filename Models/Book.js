@@ -12,5 +12,6 @@ class Book{
     getString(){
         return [this.id,this.name,this.isbn,JSON.stringify(this.authors),this.numPages,this.publisher,this.dataRelease,JSON.stringify(this.characters)]
     }
+    
 }
 module.exports=Book;

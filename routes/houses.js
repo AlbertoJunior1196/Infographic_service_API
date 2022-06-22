@@ -31,12 +31,31 @@ router
         res.send("Foi adicionado")
     })
     .get("/",(req,res)=>{
-        res.send(Aplicacao.ObterHouses())
+        Aplicacao.ObterHouses().then(function(result){
+            res.send(getParsedHouses(result));
+        })
     })
     .delete("/:id",(req,res)=>{
         Aplicacao.RemoverHouses(req.params.id)
     })
     .get("/:id",(req,res)=>{
-    res.send(Aplicacao.ObterHouse(req.params.id))
+        Aplicacao.ObterHouse(req.params.id).then(function(result){
+            res.send(getParsedHouse(result[0]));
+        })
     })
+    function getParsedHouses(elements){
+        var array=[];
+        elements.forEach(function(item){
+            item.titles=JSON.parse(item.titles);
+            item.members=JSON.parse(item.members);
+            array.push(item);
+        })
+        return array;
+    }
+    function getParsedHouse(item){
+        item.titles=JSON.parse(item.titles);
+        item.members=JSON.parse(item.members);
+        return item
+    }
+
 module.exports = router;

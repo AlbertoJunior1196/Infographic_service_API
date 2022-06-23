@@ -1,7 +1,7 @@
 var mysql = require('mysql')
 var connection = mysql.createConnection({
-    host: "localhost",
-    port:'3307',
+    host: "host.docker.internal",
+    port:'3306',
     user: "root",
     password: "#password1196",
     database:"db_infographics"

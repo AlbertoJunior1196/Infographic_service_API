@@ -1,4 +1,4 @@
-var mysql = require('mysql')
+var mysql = require('mysql2')
 var connection = mysql.createConnection({
     host: "host.docker.internal",
     port:'3307',

@@ -8,7 +8,7 @@ class Aplicacao{
     }
     InicializaTabelas(){
         let queryTabelaBook=`
-        CREATE TABLE  if not exists Books(
+        CREATE TABLE  if not exists books(
             id INT NOT NULL,
             nome VARCHAR(255),
             isbn VARCHAR(255),
@@ -19,7 +19,7 @@ class Aplicacao{
             characters JSON
         )`;
         let queryTabelaCharacters=`
-        CREATE TABLE  if not exists Characters(
+        CREATE TABLE  if not exists characters(
             id INT NOT NULL,
             nome VARCHAR(255),
             gender VARCHAR(255),
@@ -29,7 +29,7 @@ class Aplicacao{
             books JSON
         )`; 
         let queryTabelaHouses=`
-        CREATE TABLE  if not exists Houses(
+        CREATE TABLE  if not exists houses(
             id INT NOT NULL,
             nome VARCHAR(255),
             region VARCHAR(255),

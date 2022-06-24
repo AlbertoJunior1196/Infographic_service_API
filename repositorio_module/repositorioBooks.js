@@ -5,7 +5,7 @@ class RepositorioBook{
 
     }
     Criar(Books){
-        let queryCriar=`INSERT INTO Books (id,nome,isbn,authors,numpage,publisher,dataRelease,characters) VALUES ?`;
+        let queryCriar=`INSERT INTO books (id,nome,isbn,authors,numpage,publisher,dataRelease,characters) VALUES ?`;
         var VALUES=[];
         Books.forEach(element => {
             VALUES.push(new Book(element).getString());

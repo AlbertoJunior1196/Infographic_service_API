@@ -32,7 +32,7 @@ router
     })
     .get("/",(req,res)=>{
         Aplicacao.ObterCharacters().then(function(result){
-            res.send(getParsedCharacters(result))
+            res.send(result)
         })
     })
     .delete("/:id",(req,res)=>{
@@ -40,7 +40,7 @@ router
     })
     .get("/:id",(req,res)=>{
         Aplicacao.ObterCharacter(req.params.id).then(function(result){
-            res.send(getParsedCharacter(result[0]))
+            res.send(result[0])
         })
     })
      

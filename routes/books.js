@@ -42,7 +42,7 @@ router
     .get("/",(req,res)=>{
         console.log("saida"+Aplicacao.ObterLivros());
         Aplicacao.ObterLivros().then(function(result){
-            res.send(getParsedBooks(result))
+            res.send(result)
         })
     })
     .delete("/:id",(req,res)=>{
@@ -50,7 +50,7 @@ router
     })
     .get("/:id",(req,res)=>{
         Aplicacao.ObterLivro(req.params.id).then(function(result){
-            res.send(getParsedBook(result[0]))
+            res.send(result[0])
         })
     })
 

@@ -32,7 +32,7 @@ router
     })
     .get("/",(req,res)=>{
         Aplicacao.ObterHouses().then(function(result){
-            res.send(getParsedHouses(result));
+            res.send(result);
         })
     })
     .delete("/:id",(req,res)=>{
@@ -40,7 +40,7 @@ router
     })
     .get("/:id",(req,res)=>{
         Aplicacao.ObterHouse(req.params.id).then(function(result){
-            res.send(getParsedHouse(result[0]));
+            res.send(result[0]);
         })
     })
     function getParsedHouses(elements){
